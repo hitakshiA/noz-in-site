@@ -124,8 +124,10 @@ nav {
   display: none;
   flex-direction: column;
   justify-content: space-between;
-  width: 24px;
-  height: 14px;
+  box-sizing: border-box;
+  width: 44px;
+  height: 44px;
+  padding: 15px 10px;   /* content box stays 24x14; hit area is 44x44 */
   background: none;
   border: none;
   cursor: pointer;
@@ -414,13 +416,15 @@ nav {
     height: 100vh;
     background: var(--bg);
     transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow-y: auto;
+    padding: 48px 0;
     z-index: 1000;
   }
   .nav-menu.active { right: 0; }
-  .nav-links { flex-direction: column; gap: 28px; text-align: center; }
-  .nav-links a { font-size: 1.1rem; }
+  .nav-links { flex-direction: column; gap: 6px; text-align: center; }
+  .nav-links a { font-size: 1.15rem; display: block; padding: 12px 28px; }
   .nav-actions { flex-direction: column; width: 220px; }
-  .btn-login, .btn-signup { width: 100%; text-align: center; padding: 12px; }
+  .btn-login, .btn-signup { width: 100%; text-align: center; padding: 14px; font-size: var(--text-body); }
   .icon-node { width: 38px; height: 38px; }
   .icon-node svg, .icon-node img { width: 22px; height: 22px; }
   .icon-node-center { width: 52px; height: 52px; }
@@ -430,6 +434,7 @@ nav {
 }
 @media (max-width: 480px) {
   .hero-card { border-radius: 16px; }
+  .pipeline-line { width: 52px; }
   .brands { gap: 24px; }
   .brand-item { font-size: 0.95rem; }
 }
