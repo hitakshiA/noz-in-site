@@ -65,6 +65,13 @@ main {
 a { text-decoration: none; color: inherit; }
 ul { list-style: none; }
 
+/* keyboard focus — outline follows each element's own border-radius */
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+/* pointer users don't get the ring; keyboard users always do */
+
 /* ============================ NAVBAR ============================ */
 nav {
   width: 100%;
@@ -238,9 +245,8 @@ nav {
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
+  cursor: default;
   z-index: 3;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
   box-shadow:
     6px 6px 12px rgba(0, 0, 0, 0.4),
     -4px -4px 10px rgba(255, 255, 255, 0.03),
@@ -254,19 +260,6 @@ nav {
   border-radius: 50%;
   border: 1px dotted #2a2e3a;
   pointer-events: none;
-}
-.icon-node:hover {
-  transform: translateY(-1px);
-  box-shadow:
-    8px 8px 16px rgba(0, 0, 0, 0.5),
-    -5px -5px 12px rgba(255, 255, 255, 0.04),
-    inset 1px 1px 1px rgba(255, 255, 255, 0.06),
-    inset 4px 4px 8px rgba(0, 0, 0, 0.45);
-}
-.icon-node:active {
-  box-shadow:
-    inset 2px 2px 6px rgba(0, 0, 0, 0.5),
-    inset -2px -2px 6px rgba(255, 255, 255, 0.04);
 }
 .icon-node svg, .icon-node img { width: 26px; height: 26px; position: relative; z-index: 1; display: block; object-fit: contain; }
 
@@ -340,11 +333,11 @@ nav {
   display: block;
   font-weight: 600;
   margin-top: var(--space-2xs);
-  color: #9db2f7;
+  color: #b7c5fb;
 }
 .hero-sub {
   font-size: var(--text-body);
-  color: #9aa0b4;
+  color: #c4cadd;
   max-width: 470px;
   margin: var(--space-md) auto var(--space-xl);
   line-height: 1.65;
@@ -357,6 +350,7 @@ nav {
   border-radius: 999px;
   font-weight: 600;
   font-size: var(--text-ui);
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.28);
   transition: opacity 0.2s ease, transform 0.2s ease;
 }
 .btn-cta:hover { opacity: 0.9; transform: translateY(-1px); }
@@ -364,7 +358,7 @@ nav {
 
 /* ============================ BRANDS ============================ */
 .brands-caption {
-  color: rgba(255, 255, 255, 0.28);
+  color: rgba(255, 255, 255, 0.55);
   font-size: var(--text-caption);
   font-weight: 500;
   letter-spacing: 0.08em;
