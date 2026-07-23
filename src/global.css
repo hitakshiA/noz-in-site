@@ -30,6 +30,10 @@
   --text-body: 1rem;         /* 16px — body floor */
   --text-lead: 1.0625rem;    /* 17px */
   --text-display: clamp(2.5rem, 5.5vw, 4.25rem);
+
+  /* motion */
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -87,7 +91,7 @@ nav {
   font-size: var(--text-ui);
   cursor: pointer;
   border: 1px solid transparent;
-  transition: background 0.2s ease, opacity 0.2s ease;
+  transition: background 0.2s ease, opacity 0.2s ease, transform 0.12s var(--ease-out-quart);
   white-space: nowrap;
 }
 .btn-login {
@@ -103,6 +107,7 @@ nav {
   font-weight: 600;
 }
 .btn-signup:hover { opacity: 0.88; }
+.btn-login:active, .btn-signup:active { transform: scale(0.97); }
 
 .menu-toggle {
   display: none;
@@ -342,6 +347,7 @@ nav {
   transition: opacity 0.2s ease, transform 0.2s ease;
 }
 .btn-cta:hover { opacity: 0.9; transform: translateY(-1px); }
+.btn-cta:active { transform: scale(0.98); }
 
 /* ============================ BRANDS ============================ */
 .brands-caption {
@@ -368,7 +374,10 @@ nav {
   font-size: var(--text-lead);
   font-weight: 500;
   white-space: nowrap;
+  opacity: 0.85;
+  transition: opacity 0.25s var(--ease-out-quart), transform 0.25s var(--ease-out-quart);
 }
+.brand-item:hover { opacity: 1; transform: translateY(-2px); }
 .brand-item img { width: 22px; height: 22px; object-fit: contain; display: block; }
 
 /* ============================ RESPONSIVE ============================ */
@@ -493,8 +502,42 @@ nav {
   .road dt { font-size: var(--text-ui); }
 }
 
-/* reduced motion: no looping beam, no splash pulse */
+/* ============================ ENTRANCE CHOREOGRAPHY ============================ */
+@keyframes rise {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: none; }
+}
+/* backwards fill: hidden through the stagger delay, then reverts to normal
+   styles so hover transforms keep working after the entrance completes. */
+.icon-pipeline,
+.hero-heading, .hero-sub, .hero-content .btn-cta,
+.brands-caption, .brands,
+.method-head, .method-section, .method-cta {
+  animation: rise 0.72s var(--ease-out-expo) backwards;
+}
+.icon-pipeline   { animation-delay: 0.05s; }
+.hero-heading    { animation-delay: 0.20s; }
+.hero-sub        { animation-delay: 0.32s; }
+.hero-content .btn-cta { animation-delay: 0.42s; }
+.brands-caption  { animation-delay: 0.54s; }
+.brands          { animation-delay: 0.62s; }
+
+.method-head              { animation-delay: 0.04s; }
+.method-section:nth-of-type(1) { animation-delay: 0.12s; }
+.method-section:nth-of-type(2) { animation-delay: 0.19s; }
+.method-section:nth-of-type(3) { animation-delay: 0.26s; }
+.method-section:nth-of-type(4) { animation-delay: 0.33s; }
+.method-section:nth-of-type(5) { animation-delay: 0.40s; }
+.method-cta      { animation-delay: 0.48s; }
+
+/* ============================ REDUCED MOTION ============================ */
 @media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
   .splash.animate { animation: none; }
-  * { scroll-behavior: auto; }
 }
