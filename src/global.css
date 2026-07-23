@@ -48,6 +48,7 @@ body {
   font-family: var(--font-body);
   font-kerning: normal;
   min-height: 100vh;
+  overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -365,27 +366,46 @@ nav {
   text-transform: uppercase;
   margin: var(--space-4xl) 0 var(--space-md);
 }
-.brands {
+.marquee {
+  width: 100vw;
+  overflow: hidden;
+  padding: var(--space-md) 0 var(--space-3xl);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+}
+.marquee-track {
   display: flex;
-  gap: clamp(var(--space-lg), 5vw, var(--space-3xl));
-  padding: 0 var(--space-lg) var(--space-2xl);
-  flex-wrap: wrap;
-  justify-content: center;
+  width: max-content;
+  animation: marquee 34s linear infinite;
+}
+.marquee:hover .marquee-track { animation-play-state: paused; }
+.marquee-group {
+  display: flex;
   align-items: center;
+  flex-shrink: 0;
+  margin: 0;
+  padding: 0;
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
 }
 .brand-item {
   display: flex;
   align-items: center;
-  gap: 10px;
-  color: rgba(255, 255, 255, 0.6);
-  font-size: var(--text-lead);
+  gap: 14px;
+  padding: 0 clamp(30px, 4vw, 68px);
+  color: rgba(255, 255, 255, 0.62);
+  font-size: clamp(1.2rem, 2vw, 1.7rem);
   font-weight: 500;
   white-space: nowrap;
-  opacity: 0.85;
-  transition: opacity 0.25s var(--ease-out-quart), transform 0.25s var(--ease-out-quart);
 }
-.brand-item:hover { opacity: 1; transform: translateY(-2px); }
-.brand-item img { width: 22px; height: 22px; object-fit: contain; display: block; }
+.brand-item img {
+  width: clamp(30px, 3.4vw, 44px);
+  height: clamp(30px, 3.4vw, 44px);
+  object-fit: contain;
+  display: block;
+}
 
 /* ============================ RESPONSIVE ============================ */
 @media (max-width: 860px) {
@@ -424,13 +444,11 @@ nav {
   .icon-node-center { width: 52px; height: 52px; }
   .icon-node-center svg { width: 26px; height: 26px; }
   .hero-card { padding: var(--space-3xl) var(--space-lg); min-height: auto; }
-  .brands { gap: 32px; }
+  .marquee-track { animation-duration: 24s; }
 }
 @media (max-width: 480px) {
   .hero-card { border-radius: 16px; }
   .pipeline-line { width: 52px; }
-  .brands { gap: 24px; }
-  .brand-item { font-size: 0.95rem; }
 }
 
 /* ============================ METHOD PAGE ============================ */
@@ -521,7 +539,7 @@ nav {
    own navigation motion. backwards fill keeps hover transforms working after. */
 .first-load .icon-pipeline,
 .first-load .hero-heading, .first-load .hero-sub, .first-load .hero-content .btn-cta,
-.first-load .brands-caption, .first-load .brands,
+.first-load .brands-caption, .first-load .marquee,
 .first-load .method-head, .first-load .method-section, .first-load .method-cta {
   animation: rise 0.72s var(--ease-out-expo) backwards;
 }
@@ -530,7 +548,7 @@ nav {
 .first-load .hero-sub        { animation-delay: 0.32s; }
 .first-load .hero-content .btn-cta { animation-delay: 0.42s; }
 .first-load .brands-caption  { animation-delay: 0.54s; }
-.first-load .brands          { animation-delay: 0.62s; }
+.first-load .marquee         { animation-delay: 0.62s; }
 
 .first-load .method-head              { animation-delay: 0.04s; }
 .first-load .method-section:nth-of-type(1) { animation-delay: 0.12s; }
@@ -572,4 +590,8 @@ nav {
     scroll-behavior: auto !important;
   }
   .splash.animate { animation: none; }
+  .marquee { width: 100%; -webkit-mask-image: none; mask-image: none; padding-bottom: var(--space-2xl); }
+  .marquee-track { width: 100%; justify-content: center; flex-wrap: wrap; }
+  .marquee-group[aria-hidden="true"] { display: none; }
+  .brand-item { padding: 12px clamp(16px, 3vw, 32px); }
 }

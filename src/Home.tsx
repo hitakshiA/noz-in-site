@@ -190,13 +190,25 @@ export default function Home() {
       </section>
 
       <p className="brands-caption">Proven against real dashboards from</p>
-      <div className="brands">
-        {brands.map((b) => (
-          <div className="brand-item" key={b.name}>
-            <img src={b.logo} alt={b.name} />
-            <span>{b.name}</span>
-          </div>
-        ))}
+      <div className="marquee" role="group" aria-label="Dashboard sources noz-in migrates from: Grafana, Prometheus, Kubernetes, Istio, Thanos">
+        <div className="marquee-track">
+          <ul className="marquee-group">
+            {brands.map((b) => (
+              <li className="brand-item" key={b.name}>
+                <img src={b.logo} alt={b.name} />
+                <span>{b.name}</span>
+              </li>
+            ))}
+          </ul>
+          <ul className="marquee-group" aria-hidden="true">
+            {brands.map((b) => (
+              <li className="brand-item" key={b.name + '-dup'}>
+                <img src={b.logo} alt="" />
+                <span>{b.name}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </main>
   )
