@@ -63,6 +63,25 @@ main {
   align-items: center;
 }
 
+/* the home is a single, no-scroll viewport: the hero card flexes to fill the
+   space between the nav and the bottom marquee, so nothing sits below the fold */
+.home {
+  height: 100dvh;
+  overflow: hidden;
+}
+.home nav { flex: none; margin-bottom: clamp(2px, 0.8vh, 10px); }
+.home .hero-card {
+  flex: 1 1 auto;
+  min-height: 0;
+  justify-content: center;
+  padding: clamp(16px, 3vh, 52px) clamp(20px, 4vw, 48px);
+}
+.home .icon-pipeline { margin-bottom: clamp(14px, 3vh, 40px); }
+.home .hero-heading { font-size: clamp(1.9rem, 4.4vw, 3.6rem); }
+.home .hero-sub { margin: clamp(8px, 1.5vh, 18px) auto clamp(12px, 2.2vh, 26px); }
+.home .brands-caption { flex: none; margin: clamp(8px, 1.6vh, 20px) 0 clamp(4px, 0.8vh, 10px); }
+.home .marquee { flex: none; padding: 0 0 clamp(12px, 2.2vh, 32px); }
+
 a { text-decoration: none; color: inherit; }
 ul { list-style: none; }
 
@@ -443,8 +462,11 @@ nav {
   .icon-node svg, .icon-node img { width: 22px; height: 22px; }
   .icon-node-center { width: 52px; height: 52px; }
   .icon-node-center svg { width: 26px; height: 26px; }
-  .hero-card { padding: var(--space-3xl) var(--space-lg); min-height: auto; }
-  .marquee-track { animation-duration: 24s; }
+  .home { height: auto; min-height: 100dvh; overflow: visible; }
+  .home .hero-card { flex: none; }
+  .hero-card { padding: var(--space-2xl) var(--space-lg); min-height: auto; }
+  .home .hero-heading { font-size: clamp(1.8rem, 7vw, 2.6rem); }
+  .marquee-track { animation-duration: 22s; }
 }
 @media (max-width: 480px) {
   .hero-card { border-radius: 16px; }

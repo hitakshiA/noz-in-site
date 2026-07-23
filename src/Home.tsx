@@ -140,7 +140,7 @@ export default function Home() {
   }, [])
 
   return (
-    <main>
+    <main className="home">
       <Nav />
 
       <section className="hero-card">
@@ -181,9 +181,8 @@ export default function Home() {
             <strong>migrate into SigNoz</strong>
           </h1>
           <p className="hero-sub">
-            Every Grafana dashboard migrates in seconds. Queries it can't prove equivalent
-            stay as verbatim PromQL that SigNoz runs; the ones that match your live data
-            become native Builder queries. It never claims a conversion it can't prove.
+            Every Grafana dashboard migrates in seconds. Only what's proven equivalent on
+            your live data becomes native. It never claims a conversion it can't prove.
           </p>
           <a href={`${REPO}#reproduce`} className="btn-cta">Get Started</a>
         </div>

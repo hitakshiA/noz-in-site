@@ -33,8 +33,7 @@ export default function Nav() {
           <li><a href={`${REPO}#readme`} onClick={closeMenu}>Docs</a></li>
         </ul>
         <div className="nav-actions">
-          <a className="btn-login" href={REPO}>GitHub</a>
-          <a className="btn-signup" href={`${REPO}#reproduce`}>Get Started</a>
+          <a className="btn-signup" href={REPO}>GitHub</a>
         </div>
       </div>
     </nav>
