@@ -181,9 +181,9 @@ export default function Home() {
             <strong>migrate into SigNoz</strong>
           </h1>
           <p className="hero-sub">
-            Every Grafana dashboard migrates in seconds through safe PromQL passthrough.
-            Only the queries proven equivalent on your live data are promoted to native
-            SigNoz Builder queries — nothing is claimed without proof.
+            Every Grafana dashboard migrates in seconds. Queries it can't prove equivalent
+            stay as verbatim PromQL that SigNoz runs; the ones that match your live data
+            become native Builder queries. It never claims a conversion it can't prove.
           </p>
           <a href={`${REPO}#reproduce`} className="btn-cta">Get Started</a>
         </div>

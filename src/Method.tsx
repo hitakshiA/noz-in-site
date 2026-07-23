@@ -12,31 +12,29 @@ export default function Method() {
           <p className="eyebrow">The method</p>
           <h1 className="method-title">Every query migrates.<br />Only proof earns native.</h1>
           <p className="method-lead">
-            A Grafana dashboard is hundreds of PromQL queries, and PromQL does not mean
-            the same thing on SigNoz. noz-in never guesses. It rests on one floor and one
-            invariant, and it tells you the truth about every query it touches.
+            A Grafana dashboard is hundreds of PromQL queries, and PromQL doesn't mean the
+            same thing on SigNoz. noz-in never guesses. It's built on one floor and one
+            invariant, and it's honest about what it does to every query.
           </p>
         </header>
 
         <section className="method-section">
           <h2>The floor</h2>
           <p>
-            Every query always migrates. When a PromQL query cannot be proven equivalent
-            to a native SigNoz Builder query, the verbatim PromQL is emitted and SigNoz
-            runs it directly. One hundred percent of dashboards come out the other side
-            rendering — nothing is silently dropped, and every decision carries a stable
-            reason code you can read.
+            Every query migrates. When a query can't be proven equivalent to a native
+            Builder query, noz-in emits the PromQL verbatim and SigNoz runs it. Every
+            dashboard renders. Nothing gets dropped without a reason code you can read.
           </p>
         </section>
 
         <section className="method-section">
           <h2>The invariant</h2>
           <p>
-            Nothing is emitted as <em>native</em> on a parser's opinion. Before a Builder
-            query is promoted, it is executed against your live SigNoz alongside its own
-            PromQL passthrough and compared point for point — including a one-step temporal
-            phase-shift check that a magnitude tolerance alone would miss. Native stops
-            being a claim and becomes a measurement.
+            noz-in won't call a query <em>native</em> on a parser's opinion. Before it
+            promotes a Builder query, it runs that query and its own PromQL against your
+            live SigNoz and compares them point by point. That includes a one-step phase
+            shift a magnitude check would miss. Native stops being a claim and becomes a
+            measurement.
           </p>
         </section>
 
@@ -45,15 +43,15 @@ export default function Method() {
           <dl className="roads">
             <div className="road">
               <dt>native</dt>
-              <dd>A Builder query proven equivalent on your live data. Restores drilldown and click-to-filter.</dd>
+              <dd>A Builder query proven equivalent on your live data. Brings back drilldown and click-to-filter.</dd>
             </div>
             <div className="road">
               <dt>passthrough</dt>
-              <dd>Verified PromQL that SigNoz executes directly. The safe floor — always renders.</dd>
+              <dd>Verified PromQL that SigNoz runs directly. This is the floor, and it always renders.</dd>
             </div>
             <div className="road">
               <dt>needs review</dt>
-              <dd>Genuinely ambiguous. Flagged with a reason code instead of guessed.</dd>
+              <dd>Genuinely ambiguous, so it's flagged with a reason code instead of guessed.</dd>
             </div>
           </dl>
         </section>
@@ -63,8 +61,8 @@ export default function Method() {
           <p>
             SigNoz's <code>latest</code> labels each bucket at its start; PromQL evaluates
             at the boundary. The two can be numerically identical yet one step apart in
-            time. A magnitude-only check would call that a match — noz-in refuses it. The
-            differential is phase-aware: it will not adopt a shifted result, no matter how
+            time. A magnitude-only check would call that a match. noz-in refuses it: the
+            differential is phase-aware, so it won't adopt a shifted result no matter how
             close the numbers are.
           </p>
         </section>
@@ -72,10 +70,10 @@ export default function Method() {
         <section className="method-section">
           <h2>Propose, verify, adopt</h2>
           <p>
-            Where equivalence cannot be proven deterministically, an agent may propose a
-            Builder query — but the CLI verifies it against live data before anything is
-            adopted. Proposed by the agent, proven by the tool. The worst a wrong proposal
-            can do is stay passthrough.
+            When equivalence can't be proven deterministically, an agent can propose a
+            Builder query. The CLI still verifies it against live data before it's adopted.
+            Proposed by the agent, proven by the tool. The worst a wrong proposal can do is
+            stay passthrough.
           </p>
         </section>
 
