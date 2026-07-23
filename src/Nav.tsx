@@ -18,7 +18,7 @@ export default function Nav() {
 
   return (
     <nav>
-      <Link to="/" className="nav-logo" onClick={closeMenu}>noz<b>-in</b></Link>
+      <Link to="/" className="nav-logo" onClick={closeMenu} viewTransition>noz<b>-in</b></Link>
       <button
         className={`menu-toggle${menuOpen ? ' active' : ''}`}
         onClick={toggleMenu}
@@ -29,9 +29,8 @@ export default function Nav() {
       </button>
       <div className={`nav-menu${menuOpen ? ' active' : ''}`}>
         <ul className="nav-links">
-          <li><Link to="/method" onClick={closeMenu}>Method</Link></li>
+          <li><Link to="/method" onClick={closeMenu} viewTransition>Method</Link></li>
           <li><a href={`${REPO}#readme`} onClick={closeMenu}>Docs</a></li>
-          <li><a href={REPO} onClick={closeMenu}>GitHub</a></li>
         </ul>
         <div className="nav-actions">
           <a className="btn-login" href={REPO}>GitHub</a>

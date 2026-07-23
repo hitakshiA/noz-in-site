@@ -11,3 +11,10 @@ createRoot(document.getElementById('root')!).render(
     </BrowserRouter>
   </StrictMode>,
 )
+
+// The staggered entrance runs only on first load; after that, cross-route
+// View Transitions own the motion. Clear the flag on first interaction (before
+// any navigation captures the destination) or once the entrance has finished.
+const clearFirstLoad = () => document.documentElement.classList.remove('first-load')
+window.addEventListener('pointerdown', clearFirstLoad, { once: true })
+window.setTimeout(clearFirstLoad, 1400)

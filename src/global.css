@@ -51,6 +51,17 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* #root and main must fill the viewport width so the nav never shrink-wraps to
+   the page's content width (e.g. the 720px Method article). Children center
+   themselves via main's cross-axis alignment. */
+#root { width: 100%; }
+main {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 a { text-decoration: none; color: inherit; }
 ul { list-style: none; }
 
@@ -507,28 +518,50 @@ nav {
   from { opacity: 0; transform: translateY(16px); }
   to   { opacity: 1; transform: none; }
 }
-/* backwards fill: hidden through the stagger delay, then reverts to normal
-   styles so hover transforms keep working after the entrance completes. */
-.icon-pipeline,
-.hero-heading, .hero-sub, .hero-content .btn-cta,
-.brands-caption, .brands,
-.method-head, .method-section, .method-cta {
+/* Entrance runs only on first load (.first-load); cross-route View Transitions
+   own navigation motion. backwards fill keeps hover transforms working after. */
+.first-load .icon-pipeline,
+.first-load .hero-heading, .first-load .hero-sub, .first-load .hero-content .btn-cta,
+.first-load .brands-caption, .first-load .brands,
+.first-load .method-head, .first-load .method-section, .first-load .method-cta {
   animation: rise 0.72s var(--ease-out-expo) backwards;
 }
-.icon-pipeline   { animation-delay: 0.05s; }
-.hero-heading    { animation-delay: 0.20s; }
-.hero-sub        { animation-delay: 0.32s; }
-.hero-content .btn-cta { animation-delay: 0.42s; }
-.brands-caption  { animation-delay: 0.54s; }
-.brands          { animation-delay: 0.62s; }
+.first-load .icon-pipeline   { animation-delay: 0.05s; }
+.first-load .hero-heading    { animation-delay: 0.20s; }
+.first-load .hero-sub        { animation-delay: 0.32s; }
+.first-load .hero-content .btn-cta { animation-delay: 0.42s; }
+.first-load .brands-caption  { animation-delay: 0.54s; }
+.first-load .brands          { animation-delay: 0.62s; }
 
-.method-head              { animation-delay: 0.04s; }
-.method-section:nth-of-type(1) { animation-delay: 0.12s; }
-.method-section:nth-of-type(2) { animation-delay: 0.19s; }
-.method-section:nth-of-type(3) { animation-delay: 0.26s; }
-.method-section:nth-of-type(4) { animation-delay: 0.33s; }
-.method-section:nth-of-type(5) { animation-delay: 0.40s; }
-.method-cta      { animation-delay: 0.48s; }
+.first-load .method-head              { animation-delay: 0.04s; }
+.first-load .method-section:nth-of-type(1) { animation-delay: 0.12s; }
+.first-load .method-section:nth-of-type(2) { animation-delay: 0.19s; }
+.first-load .method-section:nth-of-type(3) { animation-delay: 0.26s; }
+.first-load .method-section:nth-of-type(4) { animation-delay: 0.33s; }
+.first-load .method-section:nth-of-type(5) { animation-delay: 0.40s; }
+.first-load .method-cta      { animation-delay: 0.48s; }
+
+/* ============================ VIEW TRANSITIONS (cross-route morph) ============ */
+@supports (view-transition-name: none) {
+  /* the wordmark persists in place; the page heading morphs into the method title */
+  .nav-logo { view-transition-name: nav-logo; }
+  .hero-heading, .method-title { view-transition-name: page-title; }
+
+  ::view-transition-group(page-title) {
+    animation-duration: 0.44s;
+    animation-timing-function: var(--ease-out-expo);
+  }
+  ::view-transition-old(root), ::view-transition-new(root) {
+    animation-duration: 0.4s;
+    animation-timing-function: var(--ease-out-quart);
+  }
+  ::view-transition-old(page-title) { animation-duration: 0.28s; }
+}
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) { animation: none !important; }
+}
 
 /* ============================ REDUCED MOTION ============================ */
 @media (prefers-reduced-motion: reduce) {
